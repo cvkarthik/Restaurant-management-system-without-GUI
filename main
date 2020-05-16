@@ -1,0 +1,200 @@
+import java.util.*;
+import java.io.*;
+class order
+{
+	static String[] starters={"cheese balls"," Gobi manchurian","French Fries"};
+	static int[] prices={50,80,60};
+	static String[] mainmenu={"Tandoori roti","Butter non","Fried rice"};
+	static int[] pricem={20,40,80};
+	static String[] deserts={"vanila","Chocolate","Strawberry"};
+	static int[] priced={50,60,50};
+	static String[] breakfast={"paneer dosa","masala dosa","idli"};
+	static int[] priceb={50,40,30};
+	static String[] meals={"North Indian Thali","South Indian Thali","Rice with dal"};
+	static int[] priceme={50,40,30};
+
+}
+class customer extends order
+{
+	static String customername;
+	void name()
+	{
+
+       System.out.println("\t\tEnter your name:");
+       Scanner k=new Scanner(System.in);
+       customer.customername=k.next();
+	}
+	void data() //To write the customer name, ordered items and payment details into a file
+	{ 
+		int l=0;
+		try{
+			File f=new File("customer_data.txt");
+			f.createNewFile();
+			Scanner sf=new  Scanner(f);
+			FileWriter fw=new FileWriter(f,true);
+			fw.write("\ncustomer name is:"+customer.customername);
+			fw.write("\nHe has ordered following items:\n");
+            while(restaurant.quantity[l]!=0)
+		            {
+		            	fw.write(restaurant.quantity[l]+" ");
+			            fw.write(restaurant.items[l]+" ");
+			            fw.write("Rs."+restaurant.price[l]+" each\n");
+			            l++;
+		            }
+			fw.write("He paid an amount of:"+restaurant.totalbill+"\n");
+			fw.close();
+		}
+		catch(IOException ie)
+		{
+			System.out.println("Error");
+		}
+	}
+}
+class restaurant extends customer
+{
+	static int starter=0;
+    static int mainm=0;
+    static int desrt=0;
+	static int totalbill=0;
+	static int[] quantity=new int[10];
+	static String[] items=new String[10];
+    static int[] price=new int[10];
+    
+	public static void main(String[] args)
+	{
+		restaurant obj=new restaurant();
+		obj.name();
+		int cont;
+		int j=0;
+		System.out.println("             Welcome to COOL COURT Restaurant");
+
+					
+				do{
+						int opt,n,q;
+                    
+					System.out.println("\t\tchoose 1 for Starters\n\t\tchoose 2 for Main foods\n\t\tchoose 3 for Deserts\n\t\tchoose 4 for Breakfast\n\t\tchoose 5 for Meals\n");
+			        Scanner sc =new Scanner(System.in);
+			        opt=sc.nextInt();
+
+							    switch(opt){
+									case 1:
+									       String c=null;
+									       System.out.println("Starters:");
+									       System.out.println("\t\t1. cheese balls     Rs.50");
+									       System.out.println("\t\t2. Gobi manchurian  Rs.80");
+									       System.out.println("\t\t3. French Fries     Rs.60");
+									       System.out.println("\t\tSelect the item number");
+									       n=sc.nextInt();
+									       System.out.println("\t\tEnter the quantity");
+									       q=sc.nextInt();
+									       System.out.println("\t\tYou have ordered "+q+" "+starters[n-1]);
+									       restaurant.totalbill=restaurant.totalbill+prices[n-1]*q;
+
+							                         quantity[j]=q;
+							                         items[j]=starters[n-1];
+							                         price[j]=prices[n-1];
+
+							               j++;
+									       break;
+
+									case 2:
+									       System.out.println("Mainmenu:");
+									       System.out.println("\t\t1. Tandoori roti    Rs.20");
+									       System.out.println("\t\t2. Butter non       Rs.40");
+									       System.out.println("\t\t3. Fried rice       Rs.80");
+									       System.out.println("\t\tSelect the item number");
+									       n=sc.nextInt();
+									       System.out.println("\t\tEnter the quantity");
+									       q=sc.nextInt();
+									       System.out.println("\t\tYou have ordered "+q+" "+mainmenu[n-1]);
+									       restaurant.totalbill=restaurant.totalbill+pricem[n-1]*q;
+                                           
+                                                     quantity[j]=q;
+							                         items[j]=mainmenu[n-1];
+							                         price[j]=pricem[n-1];
+
+							               j++;
+									       break;
+					
+									case 3:
+									       System.out.println("Deserts:");
+									       System.out.println("\t\t1. vanila       Rs.50");
+									       System.out.println("\t\t2. Chocolate    Rs.60");
+									       System.out.println("\t\t3. Strawberry   Rs.50");
+									       System.out.println("\t\tSelect the item number");
+									       n=sc.nextInt();
+									       System.out.println("\t\tEnter the quantity");
+									       q=sc.nextInt();
+									       System.out.println("\t\tYou have ordered "+q+" "+deserts[n-1]);
+									       restaurant.totalbill=restaurant.totalbill+priced[n-1]*q;
+				                           
+				                            quantity[j]=q;
+							                         items[j]=deserts[n-1];
+							                         price[j]=priced[n-1];
+
+							               j++;
+									       break;
+									case 4:
+									       System.out.println("Breakfast:");
+									       System.out.println("\t\t1. paneer dosa    Rs.50");
+									       System.out.println("\t\t2. masala dosa    Rs.40");
+									       System.out.println("\t\t3. idli(5 pcs)    Rs.30");
+									       System.out.println("\t\tSelect the item number");
+									       n=sc.nextInt();
+									       System.out.println("\t\tEnter the quantity");
+									       q=sc.nextInt();
+									       System.out.println("\t\tYou have ordered "+q+" "+breakfast[n-1]);
+									       restaurant.totalbill=restaurant.totalbill+priceb[n-1]*q;
+				                           
+				                            quantity[j]=q;
+							                         items[j]=breakfast[n-1];
+							                         price[j]=priceb[n-1];
+
+							               j++;
+									       break;
+									case 5:
+									       System.out.println("Meals");
+									       System.out.println("\t\t1. North Indian Thali    Rs.50");
+									       System.out.println("\t\t2. South Indian Thali    Rs.40");
+									       System.out.println("\t\t3. Rice with dal         Rs.30");
+									       System.out.println("\t\tSelect the item number");
+									       n=sc.nextInt();
+									       System.out.println("\t\tEnter the quantity");
+									       q=sc.nextInt();
+									       System.out.println("\t\tYou have ordered "+q+" "+meals[n-1]);
+									       restaurant.totalbill=restaurant.totalbill+priceme[n-1]*q;
+				                            
+				                             quantity[j]=q;
+							                         items[j]=meals[n-1];
+							                         price[j]=priceme[n-1];
+
+							               j++;
+									       break;
+
+									default:
+									       System.out.println("Error");
+									       break;
+								}
+			        System.out.println("\t\tDo you want to order more?(1 if yes else 0)");
+			        cont=sc.nextInt();
+			    }while(cont==1);
+                
+                    System.out.println("You have ordered these items:\n");
+                    int i=0;
+		            while(restaurant.quantity[i]!=0)
+		            {
+		            	System.out.print(restaurant.quantity[i]+" ");
+			            System.out.print(restaurant.items[i]+" ");
+			            System.out.print("Rs."+restaurant.price[i]+" each");
+			            System.out.println("\n");
+			            i++;
+		            }
+		            
+			    System.out.println("\t\tTotal bill is:"+restaurant.totalbill);
+			    System.out.println("             Hope you liked our food and service");
+			    System.out.println("             See you soon!!!");
+			    obj.data();
+					
+		
+	}
+}
